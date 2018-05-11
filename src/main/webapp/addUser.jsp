@@ -12,7 +12,7 @@
 
 </head>
 <body>
-
+<form action="/add" method="POST">
 <table border="1">
     <caption>ADD_NEW_USER</caption>
     <thead>
@@ -25,19 +25,19 @@
     </thead>
 
     <tr>
+
         <td><input type="text" name="id"/></td>
 
         <td><input type="text" name="login"/></td>
 
         <td><input type="text" name="password"/></td>
 
-
     </tr>
 
 </table>
 
-<form action="/add" method="POST">
    <input type="submit" value="SUBMIT"/>
+
 </form>
 
 </body>

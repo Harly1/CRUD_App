@@ -61,7 +61,6 @@
         </tr>
 
     </table>
-
             <form action = addUser.jsp method="POST">
                  <input type ="submit" value="ADD">
             </form>
@@ -69,7 +68,6 @@
              <form action = index.jsp method= "POST">
                  <input type ="submit" value="UPDATE">
              </form>
-
     </body>
 </html>
 
