@@ -14,35 +14,35 @@ public class DataBaseServiceImpl implements DataBaseService {
     private final Connection connection;
 
     public DataBaseServiceImpl() {
-        this.connection = getMySqlConnection();
+        this.connection = getSqlConnection();
     }
 
-    public UsersDataSet getUser(long id) throws DBException {
+    public UsersDataSet getUser(long id) throws Exception {
         try {
             return (new UserDAO(connection).get(id));
         } catch (SQLException e) {
-            throw new DBException(e);
+            throw new Exception(e);
         }
     }
-    public String getUser(String login) throws DBException {
+    public String getUser(String login) throws Exception {
         try {
 
             return (new UserDAO(connection).getUserLogin(login));
         } catch (SQLException e) {
-            throw new DBException(e);
+            throw new Exception(e);
         }
     }
 
-    public String getUserPassword(String password) throws DBException {
+    public String getUserPassword(String password) throws Exception {
         try {
 
             return (new UserDAO(connection).getUserPassword(password));
         } catch (SQLException e) {
-            throw new DBException(e);
+            throw new Exception(e);
         }
     }
 
-    public long addUser(String login, String password) throws DBException {
+    public long addUser(String login, String password) throws Exception {
         try {
             connection.setAutoCommit(false);
             UserDAO dao = new UserDAO(connection);
@@ -56,7 +56,7 @@ public class DataBaseServiceImpl implements DataBaseService {
                 connection.rollback();
             } catch (SQLException ignore) {
             }
-            throw new DBException(e);
+            throw new Exception(e);
         } finally {
             try {
                 connection.setAutoCommit(true);
@@ -65,12 +65,12 @@ public class DataBaseServiceImpl implements DataBaseService {
         }
     }
 
-    public void cleanUp() throws DBException {
+    public void cleanUp() throws Exception {
         UserDAO dao = new UserDAO(connection);
         try {
             dao.dropTable();
         } catch (SQLException e) {
-            throw new DBException(e);
+            throw new Exception(e);
         }
     }
 
@@ -86,7 +86,7 @@ public class DataBaseServiceImpl implements DataBaseService {
     }
 
     @SuppressWarnings("UnusedDeclaration")
-    public static Connection getSqlConnection() {
+/*    public Connection getSqlConnection() {
         try {
             DriverManager.registerDriver((Driver) Class.forName("com.mysql.jdbc.Driver").newInstance());
 
@@ -108,31 +108,13 @@ public class DataBaseServiceImpl implements DataBaseService {
             e.printStackTrace();
         }
         return null;
-    }
+    }*/
 
-    /*    public static Connection getH2Connection() {
-            try {
-                String url = "jdbc:h2:./h2db";
-                String name = "tully";
-                String pass = "tully";
-
-                JdbcDataSource ds = new JdbcDataSource();
-                ds.setURL(url);
-                ds.setUser(name);
-                ds.setPassword(pass);
-
-                Connection connection = DriverManager.getConnection(url, name, pass);
-                return connection;
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }*/
-    public static Connection getMySqlConnection() {
+    public Connection getSqlConnection() {
         try {
             String url = "jdbc:sqlserver://localhost:56342;database=Test";
-            String login = "ENTERPRISE\\krvl8001";
-            String password = "ACNielsen23";
+            String login = "harly";
+            String password = "B225b7602";
 
             JdbcDataSource jdbcDataSource = new JdbcDataSource();
             jdbcDataSource.setURL(url);
