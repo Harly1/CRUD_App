@@ -1,30 +1,52 @@
 package users;
 
 public class User {
-    private int id;
-    private String login;
-    private String password;
+    protected int id;
+    protected String name;
+    protected String password;
 
-    User(String login, String password){
-        this.login = login;
+
+    public User() {
+    }
+
+    public User(int id) {
+        this.id = id;
+    }
+
+    public User(int id, String name, String password) {
+        this.name = name;
         this.password = password;
+        this.id = id;
     }
 
-    public String getLogin(){
-        return login;
+    public User(String name, String password) {
+        this.name = name;
+        this.password = password;
+
     }
 
-    public int getId(){
+    public int getId() {
         return id;
     }
 
-    public void setId(int id){
+    public void setId(int id) {
         this.id = id;
-
     }
 
+    public String getName() {
+        return name;
+    }
 
+    public void setName(String name) {
+        this.name = name;
+    }
 
+    public String getPassword() {
+        return password;
+    }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
 }

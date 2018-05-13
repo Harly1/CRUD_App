@@ -15,4 +15,22 @@
     <url-pattern>/servlet</url-pattern>
   </servlet-mapping>-->
 
+    <!--<display-name>Books Management Web Application</display-name>-->
+
+    <context-param>
+        <param-name>jdbcURL</param-name>
+        <param-value>jdbc:mysql://localhost:3306/test</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>jdbcUsername</param-name>
+        <param-value>harly</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>jdbcPassword</param-name>
+        <param-value>B225b7602</param-value>
+    </context-param>
+
+
 </web-app>
