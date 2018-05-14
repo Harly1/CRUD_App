@@ -1,6 +1,6 @@
 package dao;
 
-import com.microsoft.sqlserver.jdbc.SQLServerDriver;
+
 import users.User;
 
 import java.sql.*;
@@ -22,7 +22,7 @@ public class UserDAO {
     protected void connect() throws SQLException {
         if (jdbcConnection == null || jdbcConnection.isClosed()) {
             try {
-                Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+                Class.forName("com.mysql.jdbc.Driver");
             } catch (ClassNotFoundException e) {
                 throw new SQLException(e);
             }
@@ -95,13 +95,14 @@ public class UserDAO {
     }
 
     public boolean updateUser(User user) throws SQLException {
-        String sql = "UPDATE users SET user_name = ?, user_password = ? WHERE id = ?";
+        String sql = "UPDATE users SET user_name = ?, user_password = ?";
+        sql += " WHERE id = ?";
         connect();
 
         PreparedStatement statement = jdbcConnection.prepareStatement(sql);
-        statement.setInt(1, user.getId());
-        statement.setString(2, user.getName());
-        statement.setString(3, user.getPassword());
+        statement.setInt(3, user.getId());
+        statement.setString(1, user.getName());
+        statement.setString(2, user.getPassword());
 
 
         boolean rowUpdated = statement.executeUpdate() > 0;

@@ -88,7 +88,7 @@ import javax.servlet.http.HttpServletResponse;
             int id = Integer.parseInt(request.getParameter("id"));
             User existingUser = userDAO.getUser(id);
             RequestDispatcher dispatcher = request.getRequestDispatcher("UserForm.jsp");
-            request.setAttribute("user", existingUser);
+            request.setAttribute("users", existingUser);
             dispatcher.forward(request, response);
 
         }
@@ -112,7 +112,7 @@ import javax.servlet.http.HttpServletResponse;
             String password = request.getParameter("password");
 
 
-            User user = new User(id, name, password);
+            User user = new User(id,name, password);
             userDAO.updateUser(user);
             response.sendRedirect("list");
         }

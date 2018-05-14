@@ -23,7 +23,7 @@
 
     <context-param>
         <param-name>jdbcURL</param-name>
-        <param-value>jdbc:sqlserver://localhost:56342;database=Test</param-value>
+        <param-value>jdbc:mysql://localhost:3306/test</param-value>
     </context-param>
 
     <context-param>

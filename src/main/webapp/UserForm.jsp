@@ -12,7 +12,7 @@
 <html>
 <head>
     <a href="/list">List All Books</a>
-    <title>Add new user</title>
+    <title></title>
 
 </head>
 <body>
@@ -31,7 +31,7 @@
 <form action="/add" method="POST">
 
     <table border="1">
-        <caption>ADD_NEW_USER</caption>
+        <caption></caption>
         <thead>
         <tr>
             <th>ID</th>
@@ -44,10 +44,7 @@
             <input type="hidden" name="id" value="<c:out value='${users.id}' />" />
         </c:if>
 
-
         </thead>
-
-
 
         <tr>
 
