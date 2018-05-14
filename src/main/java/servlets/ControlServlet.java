@@ -86,17 +86,18 @@ import javax.servlet.http.HttpServletResponse;
         private void showEditForm(HttpServletRequest request, HttpServletResponse response)
                 throws SQLException, ServletException, IOException {
             int id = Integer.parseInt(request.getParameter("id"));
-            User existingBook = userDAO.getUser(id);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("BookForm.jsp");
-            request.setAttribute("book", existingBook);
+            User existingUser = userDAO.getUser(id);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("UserForm.jsp");
+            request.setAttribute("user", existingUser);
             dispatcher.forward(request, response);
 
         }
 
         private void insertUser(HttpServletRequest request, HttpServletResponse response)
                 throws SQLException, IOException {
-            String name = request.getParameter("user_name");
-            String password = request.getParameter("user_password");
+
+            String name = request.getParameter("name");
+            String password = request.getParameter("password");
 
 
             User newUser = new User(name, password);
@@ -107,8 +108,8 @@ import javax.servlet.http.HttpServletResponse;
         private void updateBook(HttpServletRequest request, HttpServletResponse response)
                 throws SQLException, IOException {
             int id = Integer.parseInt(request.getParameter("id"));
-            String name = request.getParameter("user_name");
-            String password = request.getParameter("user_password");
+            String name = request.getParameter("name");
+            String password = request.getParameter("password");
 
 
             User user = new User(id, name, password);

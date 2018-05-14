@@ -1,5 +1,6 @@
 package dao;
 
+import com.microsoft.sqlserver.jdbc.SQLServerDriver;
 import users.User;
 
 import java.sql.*;
@@ -21,7 +22,7 @@ public class UserDAO {
     protected void connect() throws SQLException {
         if (jdbcConnection == null || jdbcConnection.isClosed()) {
             try {
-                Class.forName("com.mysql.jdbc.Driver");
+                Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             } catch (ClassNotFoundException e) {
                 throw new SQLException(e);
             }
@@ -54,7 +55,7 @@ public class UserDAO {
     public List<User> listAllUsers() throws SQLException {
         List<User> listUser = new ArrayList<>();
 
-        String sql = "SELECT * FROM test.users";
+        String sql = "SELECT * FROM users";
 
         connect();
 
