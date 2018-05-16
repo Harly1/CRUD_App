@@ -9,11 +9,5 @@ public interface DBService {
     public void printConnectInfo() throws SQLException;
     public Connection getConnection();
     public UserDAO getUserDAO();
-    public void listUser();
-    public void deleteUser();
-    public void editUser();
-    public void insertUser();
-    public void newUser();
-    public void updateUser();
 
 }

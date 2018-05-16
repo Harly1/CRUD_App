@@ -32,6 +32,11 @@ import javax.servlet.http.HttpServletResponse;
 
         public void init() {
             dbService = new DBServiceImp();
+            try {
+                dbService.printConnectInfo();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
 
         protected void doPost(HttpServletRequest request, HttpServletResponse response)

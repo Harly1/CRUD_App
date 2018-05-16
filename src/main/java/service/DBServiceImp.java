@@ -17,12 +17,7 @@ public class DBServiceImp implements DBService {
         String url = dmd.getURL();
         String user = dmd.getUserName();
         String dbName = dmd.getDatabaseProductName();
-        System.out.println("url= "+url+ " user= "+user+" database= "+dbName);
-    }
-
-
-    public Connection getConnection() {
-        return new DbHelper().getJdbcConnection();
+        System.out.println("url= "+url+ '\n'+" user= "+user+ '\n'+ " database= "+dbName);
     }
 
     @Override
@@ -30,33 +25,9 @@ public class DBServiceImp implements DBService {
         return new UserDAOImp(new DbHelper().getJdbcConnection());
     }
 
-    @Override
-    public void listUser() {
-
+    public Connection getConnection() {
+        return new DbHelper().getJdbcConnection();
     }
 
-    @Override
-    public void deleteUser() {
-
-    }
-
-    @Override
-    public void editUser() {
-
-    }
-
-    @Override
-    public void insertUser() {
-
-    }
-
-    @Override
-    public void newUser() {
-
-    }
-
-    @Override
-    public void updateUser() {
-
-    }
 }
+
