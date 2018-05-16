@@ -23,8 +23,8 @@ public class DbHelper {
            this.jdbcUsername =  properties.getProperty("dbuser");
            this.jdbcPassword =  properties.getProperty("dbpassword");
 
-           DriverManager.registerDriver((Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance());
-
+//           DriverManager.registerDriver((Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance());
+           Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
            this.jdbcConnection = DriverManager.getConnection(jdbcURL,jdbcUsername,jdbcPassword) ;
 
        } catch (Exception e){

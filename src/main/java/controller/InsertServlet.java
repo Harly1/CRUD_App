@@ -1,10 +1,7 @@
 package controller;
 
-import service.DBService;
-import service.DBServiceImp;
-import util.DbHelper;
-import dao.UserDAOImp;
-import dao.UserDAO;
+import service.UserService;
+import service.UserServiceImp;
 import model.User;
 
 import javax.servlet.ServletException;
@@ -18,11 +15,10 @@ import java.sql.SQLException;
 @WebServlet(name="InsertServlet", displayName="InsertServlet", urlPatterns = {"/insert"})
 public class InsertServlet extends HttpServlet {
 
-    private static final long serialVersionUID = 1L;
-    private DBService dbService;
+    private UserService dbService;
 
     public void init() {
-        dbService = new DBServiceImp();
+        dbService = new UserServiceImp();
     }
 
     @Override
@@ -36,20 +32,24 @@ public class InsertServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse)
-            throws ServletException, IOException {
-        doGet(httpServletRequest, httpServletResponse);
+    protected void doPost(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws ServletException, IOException {
+        try {
+            insertUser(httpServletRequest,httpServletResponse);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     private void insertUser(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
+//        int id = Integer.parseInt(request.getParameter("id"));
         String name = request.getParameter("name");
         String password = request.getParameter("password");
 
 
-        User newUser = new User(id, name, password);
-        dbService.getUserDAO().insertUser(newUser);
+//        User newUser = new User(id, name, password);
+        User newUser = new User(name, password);
+        dbService.insertUser(newUser);
         response.sendRedirect("list");
     }
 }

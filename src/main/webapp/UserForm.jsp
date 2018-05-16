@@ -34,7 +34,7 @@
         <caption></caption>
         <thead>
         <tr>
-            <th>ID</th>
+            <%--<th>ID</th>--%>
             <th>NAME</th>
             <th>PASSWORD</th>
 
@@ -48,11 +48,11 @@
 
         <tr>
 
-            <td>
-                <input type="text" name="id" size="45"
-                       value="<c:out value='${users.id}' />"
-                />
-            </td>
+            <%--<td>--%>
+                <%--<input type="text" name="id" size="45"--%>
+                       <%--value="<c:out value='${users.id}' />"--%>
+                <%--/>--%>
+            <%--</td>--%>
 
              <td>
                     <input type="text" name="name" size="45"

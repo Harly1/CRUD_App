@@ -7,10 +7,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDAOImp implements UserDAO {
+public class UserDaoJDBCImp implements UserDAO {
     private Connection jdbcConnection;
 
-    public UserDAOImp(Connection jdbcConnection) {
+    public UserDaoJDBCImp(Connection jdbcConnection) {
 
         this.jdbcConnection = jdbcConnection;
 
@@ -34,18 +34,19 @@ public class UserDAOImp implements UserDAO {
     }
 
     public boolean insertUser(User user) throws SQLException {
-        String sql = "INSERT INTO users (id, user_name, user_password) VALUES (?, ?, ?)";
+//        String sql = "INSERT INTO users (id, user_name, user_password) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO users (user_name, user_password) VALUES (?, ?)";
         connect();
 
         PreparedStatement statement = jdbcConnection.prepareStatement(sql);
-        statement.setString(2, user.getName());
-        statement.setString(3, user.getPassword());
-        statement.setString(1, String.valueOf(user.getId()));
+        statement.setString(1, user.getName());
+        statement.setString(2, user.getPassword());
+//        statement.setString(1, String.valueOf(user.getId()));
 
 
         boolean rowInserted = statement.executeUpdate() > 0;
         statement.close();
-        disconnect();
+//        disconnect();
         return rowInserted;
     }
 
@@ -71,7 +72,7 @@ public class UserDAOImp implements UserDAO {
         resultSet.close();
         statement.close();
 
-        disconnect();
+//        disconnect();
 
         return listUser;
     }
@@ -85,7 +86,7 @@ public class UserDAOImp implements UserDAO {
 
         boolean rowDeleted = statement.executeUpdate() > 0;
         statement.close();
-        disconnect();
+//        disconnect();
         return rowDeleted;
     }
 
@@ -102,7 +103,7 @@ public class UserDAOImp implements UserDAO {
 
         boolean rowUpdated = statement.executeUpdate() > 0;
         statement.close();
-        disconnect();
+//        disconnect();
         return rowUpdated;
     }
 

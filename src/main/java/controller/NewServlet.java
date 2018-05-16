@@ -1,10 +1,7 @@
 package controller;
 
-import dao.UserDAOImp;
-import service.DBService;
-import service.DBServiceImp;
-import util.DbHelper;
-import dao.UserDAO;
+import service.UserService;
+import service.UserServiceImp;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,11 +14,10 @@ import java.io.IOException;
 @WebServlet(name="NewServlet", displayName="NewServlet", urlPatterns = {"/new"})
 public class NewServlet extends HttpServlet {
 
-    private static final long serialVersionUID = 1L;
-    private DBService dbService;
+    private UserService dbService;
 
     public void init() {
-        dbService = new DBServiceImp();
+        dbService = new UserServiceImp();
     }
 
     @Override
@@ -29,10 +25,6 @@ public class NewServlet extends HttpServlet {
         showNewForm(httpServletRequest,httpServletResponse);
     }
 
-    @Override
-    protected void doPost(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws ServletException, IOException {
-        doGet(httpServletRequest, httpServletResponse);
-    }
 
     private void showNewForm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

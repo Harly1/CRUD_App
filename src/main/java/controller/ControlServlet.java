@@ -1,10 +1,7 @@
 package controller;
 
-import service.DBService;
-import service.DBServiceImp;
-import util.DbHelper;
-import dao.UserDAOImp;
-import dao.UserDAO;
+import service.UserService;
+import service.UserServiceImp;
 import model.User;
 
 import java.io.IOException;
@@ -27,11 +24,10 @@ import javax.servlet.http.HttpServletResponse;
     @WebServlet (name="ControlServlet", displayName="ControlServlet", urlPatterns = {"/"})
     public class ControlServlet extends HttpServlet {
 
-        private static final long serialVersionUID = 1L;
-        private DBService dbService;
+        private UserService dbService;
 
         public void init() {
-            dbService = new DBServiceImp();
+            dbService = new UserServiceImp();
             try {
                 dbService.printConnectInfo();
             } catch (SQLException e) {
@@ -39,10 +35,6 @@ import javax.servlet.http.HttpServletResponse;
             }
         }
 
-        protected void doPost(HttpServletRequest request, HttpServletResponse response)
-                throws ServletException, IOException {
-            doGet(request, response);
-        }
 
         protected void doGet(HttpServletRequest request, HttpServletResponse response)
                 throws ServletException, IOException {
@@ -56,7 +48,7 @@ import javax.servlet.http.HttpServletResponse;
 
         private void listUser(HttpServletRequest request, HttpServletResponse response)
                 throws SQLException, IOException, ServletException {
-            List<User> listUser = dbService.getUserDAO().listAllUsers();
+            List<User> listUser = dbService.listUser();
             request.setAttribute("listUser", listUser);
             RequestDispatcher dispatcher = request.getRequestDispatcher("UserList.jsp");
             dispatcher.forward(request, response);
