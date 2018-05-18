@@ -24,7 +24,7 @@ public class UpdateServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws ServletException, IOException {
         try {
-            updateBook(httpServletRequest,httpServletResponse);
+            updateUser(httpServletRequest,httpServletResponse);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -33,13 +33,13 @@ public class UpdateServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws ServletException, IOException {
         try {
-            updateBook(httpServletRequest,httpServletResponse);
+            updateUser(httpServletRequest,httpServletResponse);
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    private void updateBook(HttpServletRequest request, HttpServletResponse response)
+    private void updateUser(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         String name = request.getParameter("name");

@@ -1,8 +1,19 @@
 package model;
 
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "users")
 public class User {
+    @Id
+    @Column(name = "id",unique = true)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected int id;
+
+    @Column(name = "user_name", unique = false)
     protected String name;
+    @Column(name = "user_password", unique = false)
     protected String password;
 
 
@@ -49,4 +60,12 @@ public class User {
         this.password = password;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
 }

@@ -1,8 +1,11 @@
 package service;
 
 import dao.UserDAO;
+import dao.UserDaoHibernteImp;
 import dao.UserDaoJDBCImp;
 import model.User;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.AnnotationConfiguration;
 import util.DbHelper;
 
 import java.sql.Connection;
@@ -12,7 +15,11 @@ import java.util.List;
 
 public class UserServiceImp implements UserService {
    private Connection connection = getConnection();
-   private UserDAO userDAO = new UserDaoJDBCImp(connection);
+//   private UserDAO userDAO = new UserDaoJDBCImp(connection);
+   private UserDAO userDAO = new UserDaoHibernteImp(connection);
+
+   private static final String hibernate_show_sql = "true";
+   private static final String hibernate_hbm2ddl_auto = "create";
 
 
     @Override
