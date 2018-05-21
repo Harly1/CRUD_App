@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDaoHibernteImp implements UserDAO {
+public class UserDaoHibernetImp implements UserDAO {
 
     public User getUser(int id) {
         return (User) HibernateSessionFactoryUtil.getSessionFactory().openSession().get(User.class, id);

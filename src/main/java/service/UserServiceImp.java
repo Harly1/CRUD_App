@@ -1,17 +1,12 @@
 package service;
 
 import dao.UserDAO;
-import dao.UserDaoHibernteImp;
-import dao.UserDaoJDBCImp;
+import dao.UserDaoHibernetImp;
 import model.User;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.internal.SessionImpl;
 import util.DbHelper;
 import util.HibernateSessionFactoryUtil;
-
-import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.SQLException;
@@ -20,7 +15,7 @@ import java.util.List;
 public class UserServiceImp implements UserService   {
 
    private Connection connection = getHibernetConnection();
-   private UserDAO userDAO = new UserDaoHibernteImp();
+   private UserDAO userDAO = new UserDaoHibernetImp();
 
 //    private Connection connection = DbHelper.getJdbcConnection();
 //    private UserDAO userDAO = new UserDaoJDBCImp(connection);
