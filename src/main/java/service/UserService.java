@@ -9,8 +9,8 @@ import java.util.List;
 
 public interface UserService {
      void printConnectInfo() throws SQLException;
-     Connection getJdbcConnection();
-     Connection getHibernetConnection();
+   /*  Connection getJdbcConnection();
+     Connection getHibernetConnection();*/
 
      void deleteUser(User user)    throws SQLException;
      void editUser  (int id)       throws SQLException;

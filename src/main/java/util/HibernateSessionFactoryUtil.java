@@ -1,14 +1,26 @@
 package util;
 
 import model.User;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.internal.SessionImpl;
+
+import java.sql.Connection;
 
 public class HibernateSessionFactoryUtil {
     private static SessionFactory sessionFactory;
 
     private HibernateSessionFactoryUtil() {}
+
+    public static Connection getHibernetConnection() {
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        SessionImpl sessionImpl = (SessionImpl) session;
+        Connection hibernetConn = sessionImpl.connection();
+        session.close();
+        return hibernetConn;
+    }
 
     public static SessionFactory getSessionFactory() {
         if (sessionFactory == null) {
@@ -26,4 +38,5 @@ public class HibernateSessionFactoryUtil {
         }
         return sessionFactory;
     }
+
 }

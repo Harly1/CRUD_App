@@ -2,6 +2,8 @@ package service;
 
 import dao.UserDAO;
 import dao.UserDaoHibernetImp;
+import factory.UserConnectionFactory;
+import factory.UserDaoFactory;
 import model.User;
 import org.hibernate.Session;
 import org.hibernate.internal.SessionImpl;
@@ -14,27 +16,12 @@ import java.util.List;
 
 public class UserServiceImp implements UserService   {
 
-   private Connection connection = getHibernetConnection();
-   private UserDAO userDAO = new UserDaoHibernetImp();
+   private UserDAO userDAO = UserDaoFactory.getDao();
+   private Connection connection = UserConnectionFactory.getConnection();
 
 //    private Connection connection = DbHelper.getJdbcConnection();
 //    private UserDAO userDAO = new UserDaoJDBCImp(connection);
 
-    @Override
-    public Connection getJdbcConnection() {
-        Connection jdbcConn = null;
-        jdbcConn = DbHelper.getJdbcConnection();
-        return jdbcConn;
-    }
-
-    @Override
-    public Connection getHibernetConnection() {
-        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        SessionImpl sessionImpl = (SessionImpl) session;
-        Connection hibernetConn = sessionImpl.connection();
-        session.close();
-        return hibernetConn;
-    }
 
     @Override
     public void printConnectInfo() throws SQLException {
