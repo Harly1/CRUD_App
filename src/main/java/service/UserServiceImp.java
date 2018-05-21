@@ -19,14 +19,11 @@ import java.util.List;
 
 public class UserServiceImp implements UserService   {
 
-//    private Connection connection = getHibernetConnection();
-//   private UserDAO userDAO = new UserDaoHibernteImp();
+   private Connection connection = getHibernetConnection();
+   private UserDAO userDAO = new UserDaoHibernteImp();
 
-    private Connection connection = DbHelper.getJdbcConnection();
-    private UserDAO userDAO = new UserDaoJDBCImp(connection);
-
-
-
+//    private Connection connection = DbHelper.getJdbcConnection();
+//    private UserDAO userDAO = new UserDaoJDBCImp(connection);
 
     @Override
     public Connection getJdbcConnection() {
@@ -70,9 +67,6 @@ public class UserServiceImp implements UserService   {
 
     @Override
     public User getUser(int id) throws SQLException { return userDAO.getUser(id); }
-
-
-
 
 }
 
