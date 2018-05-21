@@ -11,21 +11,27 @@ import org.hibernate.internal.SessionImpl;
 import util.DbHelper;
 import util.HibernateSessionFactoryUtil;
 
+import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.SQLException;
 import java.util.List;
 
-public class UserServiceImp implements UserService {
+public class UserServiceImp implements UserService   {
 
-    private Connection connection = getHibernetConnection();
-    private UserDAO userDAO = new UserDaoHibernteImp();
-    //private UserDAO userDAO = new UserDaoJDBCImp(connection);
-    //private UserDAO userDAO = new UserDaoJDBCImp(connection);
+//    private Connection connection = getHibernetConnection();
+//   private UserDAO userDAO = new UserDaoHibernteImp();
+
+    private Connection connection = DbHelper.getJdbcConnection();
+    private UserDAO userDAO = new UserDaoJDBCImp(connection);
+
+
+
 
     @Override
     public Connection getJdbcConnection() {
-        Connection jdbcConn = DbHelper.getJdbcConnection();
+        Connection jdbcConn = null;
+        jdbcConn = DbHelper.getJdbcConnection();
         return jdbcConn;
     }
 
