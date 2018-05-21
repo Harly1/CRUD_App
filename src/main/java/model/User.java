@@ -13,7 +13,7 @@ public class User {
     protected String name;
     @Column(name = "user_password", unique = false)
     protected String password;
-
+    protected String role;
 
     public User() {
     }
