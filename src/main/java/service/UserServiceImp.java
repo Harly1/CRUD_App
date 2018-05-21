@@ -4,9 +4,12 @@ import dao.UserDAO;
 import dao.UserDaoHibernteImp;
 import dao.UserDaoJDBCImp;
 import model.User;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
+import org.hibernate.internal.SessionImpl;
 import util.DbHelper;
+import util.HibernateSessionFactoryUtil;
 
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
@@ -14,13 +17,26 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class UserServiceImp implements UserService {
-   private Connection connection = getConnection();
-//   private UserDAO userDAO = new UserDaoJDBCImp(connection);
-   private UserDAO userDAO = new UserDaoHibernteImp(connection);
 
-   private static final String hibernate_show_sql = "true";
-   private static final String hibernate_hbm2ddl_auto = "create";
+    private Connection connection = getHibernetConnection();
+    private UserDAO userDAO = new UserDaoHibernteImp();
+    //private UserDAO userDAO = new UserDaoJDBCImp(connection);
+    //private UserDAO userDAO = new UserDaoJDBCImp(connection);
 
+    @Override
+    public Connection getJdbcConnection() {
+        Connection jdbcConn = DbHelper.getJdbcConnection();
+        return jdbcConn;
+    }
+
+    @Override
+    public Connection getHibernetConnection() {
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        SessionImpl sessionImpl = (SessionImpl) session;
+        Connection hibernetConn = sessionImpl.connection();
+        session.close();
+        return hibernetConn;
+    }
 
     @Override
     public void printConnectInfo() throws SQLException {
@@ -32,38 +48,22 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public void deleteUser(User user) throws SQLException {
-        userDAO.deleteUser(user);
-    }
+    public void deleteUser(User user) throws SQLException { userDAO.deleteUser(user); }
 
     @Override
-    public void editUser(int id) throws SQLException {
-        userDAO.getUser(id);
-    }
+    public void editUser(int id) throws SQLException { userDAO.getUser(id); }
 
     @Override
-    public void insertUser(User user) throws SQLException {
-        userDAO.insertUser(user);
-    }
+    public void insertUser(User user) throws SQLException { userDAO.insertUser(user); }
 
     @Override
-    public void updateUser(User user) throws SQLException {
-        userDAO.updateUser(user);
-    }
+    public void updateUser(User user) throws SQLException { userDAO.updateUser(user); }
 
     @Override
-    public List<User> listUser() throws SQLException {
-       return userDAO.listAllUsers();
-    }
+    public List<User> listUser() throws SQLException { return userDAO.listAllUsers(); }
 
     @Override
-    public User getUser(int id) throws SQLException {
-        return userDAO.getUser(id);
-    }
-
-    public Connection getConnection() {
-        return new DbHelper().getJdbcConnection();
-    }
+    public User getUser(int id) throws SQLException { return userDAO.getUser(id); }
 
 
 
