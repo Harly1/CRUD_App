@@ -32,7 +32,8 @@ public class InsertServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse)
+            throws ServletException, IOException {
         try {
             insertUser(httpServletRequest,httpServletResponse);
         } catch (SQLException e) {

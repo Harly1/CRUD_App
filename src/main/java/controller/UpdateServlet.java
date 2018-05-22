@@ -22,7 +22,8 @@ public class UpdateServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse)
+            throws ServletException, IOException {
         try {
             updateUser(httpServletRequest,httpServletResponse);
         } catch (SQLException e) {
@@ -31,7 +32,8 @@ public class UpdateServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse)
+            throws ServletException, IOException {
         try {
             updateUser(httpServletRequest,httpServletResponse);
         } catch (SQLException e) {

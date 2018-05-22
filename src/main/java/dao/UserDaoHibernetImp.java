@@ -61,7 +61,7 @@ public class UserDaoHibernetImp implements UserDAO {
     }
 
     public List<User> listAllUsers() {
-        List<User> users = (List<User>)  HibernateSessionFactoryUtil.getSessionFactory().openSession().createQuery("From User").list();
+        List<User> users = (List<User>)  HibernateSessionFactoryUtil.getSessionFactory().openSession().createQuery("FROM User").list();
         return users;
     }
 }
