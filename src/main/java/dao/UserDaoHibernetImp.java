@@ -18,6 +18,15 @@ public class UserDaoHibernetImp implements UserDAO {
         return (User) HibernateSessionFactoryUtil.getSessionFactory().openSession().get(User.class, id);
     }
 
+    @Override
+    public User getUserByNameAndPassword(String name, String password) throws SQLException {
+//        return (User) HibernateSessionFactoryUtil.getSessionFactory().openSession().get;
+
+//        как получить пользователя по имени и по паролю
+
+        return null;
+    }
+
     public boolean insertUser(User user) {
         try {
             Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();

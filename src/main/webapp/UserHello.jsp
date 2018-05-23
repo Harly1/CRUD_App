@@ -8,7 +8,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Hello</title>
+    <a href="/list">List All Books</a>
+    <title>Hello user</title>
+
 </head>
 <body>
 

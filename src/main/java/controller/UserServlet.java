@@ -1,5 +1,6 @@
 package controller;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,6 +14,9 @@ public class UserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse)
             throws ServletException, IOException {
 
+        RequestDispatcher dispatcher = httpServletRequest.getRequestDispatcher("UserHello.jsp");
+//        httpServletResponse.getWriter().println("User Hello");
+        dispatcher.forward(httpServletRequest, httpServletResponse);
     }
 
     @Override

@@ -19,5 +19,5 @@ public interface UserService {
 
      List<User> listUser ()        throws SQLException;
      User getUser(int id)          throws SQLException;
-
+     User getUserByNameAndPassword(String name, String password) throws SQLException;
 }

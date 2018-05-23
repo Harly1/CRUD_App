@@ -28,15 +28,24 @@ public class User {
         this.password = password;
         this.id = id;
     }
+    public User(int id, String name, String password, String role) {
+        this.name = name;
+        this.password = password;
+        this.id = id;
+        this.role = role;
+    }
 
     public User(String name, String password) {
         this.name = name;
         this.password = password;
-
     }
 
     public int getId() {
         return id;
+    }
+
+    public String getRole() {
+        return role;
     }
 
     public void setId(int id) {

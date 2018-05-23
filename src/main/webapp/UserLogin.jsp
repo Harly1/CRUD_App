@@ -29,9 +29,10 @@
 
         </tr>
 
-        <c:if test="${users != null}">
+        <%--<c:if test="${users != null}">--%>
             <input type="hidden" name="id" value="<c:out value='${users.id}' />" />
-        </c:if>
+            <%--<input type="text" name="id" value="<c:out value='${users.id}' />" />--%>
+        <%--</c:if>--%>
 
         </thead>
 

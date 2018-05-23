@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.ArrayList;
 
-@WebFilter(urlPatterns = {"/"}, filterName="ControlServletFilter")
+@WebFilter(urlPatterns = {"/*"}, filterName="ControlServletFilter")
 public class ControlServletFilter implements Filter {
 
     private FilterConfig filterConfig;
@@ -37,13 +37,20 @@ public class ControlServletFilter implements Filter {
             // Если фильтр активной, то выполнить проверку
 //            if (filterConfig.getInitParameter("active").equalsIgnoreCase("true")) {
                 HttpServletRequest req = (HttpServletRequest)servletRequest;
-                // Раскладываем адрес на составляющие
-                String[] list = req.getRequestURI().split("/");
-                // Извлекаем наименование страницы
-                String page = "UserList.jsp";
-            /*    if (list[list.length - 1].indexOf(".jsp") > 0) {
-                    page = list[list.length - 1];
-                }*/
+            // Извлекаем наименование страницы
+                String page = null;
+                String url = req.getRequestURI();
+
+                if(url.equals("/")){
+                    page = "UserList.jsp";
+
+                } else {
+                    String[] list = req.getRequestURI().split("/");
+                    if (list[list.length - 1].indexOf(".jsp") > 0) {
+                        page = list[list.length - 1];
+                    }
+                }
+
                 // Если открывается главная страница, то выполняем проверку
                 if ((page != null) && page.equalsIgnoreCase("UserList.jsp")) {
                     // Если была предварительно открыта одна из страниц
@@ -52,6 +59,7 @@ public class ControlServletFilter implements Filter {
                     if (pages.contains("UserLogin.jsp") || pages.contains("UserRegistration.jsp")) {
                         filterChain.doFilter(servletRequest, servletResponse);
                         return;
+
                     } else {
                         // Перенаправление на страницу login.jsp
                         ServletContext ctx = filterConfig.getServletContext();

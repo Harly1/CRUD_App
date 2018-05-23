@@ -50,5 +50,10 @@ public class UserServiceImp implements UserService   {
     @Override
     public User getUser(int id) throws SQLException { return userDAO.getUser(id); }
 
+    @Override
+    public User getUserByNameAndPassword(String name, String password) throws SQLException {
+        return userDAO.getUserByNameAndPassword(name,password);
+    }
+
 }
 

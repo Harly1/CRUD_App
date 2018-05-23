@@ -23,6 +23,7 @@
             <th>ID</th>
             <th>NAME</th>
             <th>PASSWORD</th>
+            <th>ROLE</th>
             <th>ACTIONS</th>
         </tr>
         <c:forEach var="users" items="${listUser}">
@@ -30,6 +31,7 @@
                 <td><c:out value="${users.id}" /></td>
                 <td><c:out value="${users.name}" /></td>
                 <td><c:out value="${users.password}" /></td>
+                <td><c:out value="${users.role}" /></td>
                 <td>
                     <a href="/edit?id=<c:out value='${users.id}' />">Edit</a>
                     &nbsp;&nbsp;&nbsp;&nbsp;

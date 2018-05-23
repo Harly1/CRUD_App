@@ -33,16 +33,29 @@ import javax.servlet.http.HttpSession;
                 throws ServletException, IOException {
 
             try {
-                checkUser(httpServletRequest, httpServletResponse);
-            } catch (SQLException e) {
+                HttpSession session = httpServletRequest.getSession(true);
+                String username = (String)session.getAttribute("username");
+
+                String login = httpServletRequest.getParameter("name");
+                String password = httpServletRequest.getParameter("password");
+                User user = dbService.getUserByNameAndPassword(login,password);
+
+                String role = user.getRole();
+
+                if(role.equals("admin")){
+                    listUser(httpServletRequest, httpServletResponse);
+
+                } else if(role.equals("user")) {
+                    RequestDispatcher dispatcher = httpServletRequest.getRequestDispatcher("UserHello.jsp");
+                    httpServletResponse.getWriter().println("User Hello");
+                    dispatcher.forward(httpServletRequest, httpServletResponse);
+                }
+
+            } catch (Exception e) {
+                httpServletResponse.getWriter().println("Incorrect login or password");
                 e.printStackTrace();
             }
 
-            try {
-                listUser(httpServletRequest, httpServletResponse);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
 
         public void init() {
@@ -74,20 +87,6 @@ import javax.servlet.http.HttpSession;
         private void checkUser(HttpServletRequest request, HttpServletResponse response)
                 throws SQLException, IOException, ServletException {
 
-            HttpSession session = request.getSession();
-            Enumeration eNames = session.getAttributeNames();
-            List<String> list = new ArrayList<>();
-            while (eNames.hasMoreElements()) {
-                String attributeName = (String) eNames.nextElement();
-                list.add(attributeName);
-                Object attribute = session.getAttribute(attributeName);
-                System.out.println(attributeName + " as " + attribute.getClass().getName() + ": " + attribute);
-            }
-
-            List<User> listUser = dbService.listUser();
-            request.setAttribute("listUser", listUser);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("UserList.jsp");
-            dispatcher.forward(request, response);
         }
 
     }
