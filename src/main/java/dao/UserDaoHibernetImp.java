@@ -19,12 +19,11 @@ public class UserDaoHibernetImp implements UserDAO {
     }
 
     @Override
-    public User getUserByNameAndPassword(String name, String password) throws SQLException {
-//        return (User) HibernateSessionFactoryUtil.getSessionFactory().openSession().get;
-
-//        как получить пользователя по имени и по паролю
-
-        return null;
+    public User getUserByName(String name) throws SQLException {
+        Query query =   HibernateSessionFactoryUtil.getSessionFactory().openSession().createQuery("FROM User WHERE user_name = :paramName");
+        query.setParameter("paramName", name);
+        User user = (User) query.uniqueResult();
+        return user;
     }
 
     public boolean insertUser(User user) {

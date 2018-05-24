@@ -2,13 +2,20 @@ package filter;
 
 
 
+import controller.ControlServlet;
+import model.User;
+import service.UserService;
+import service.UserServiceImp;
+
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 
-@WebFilter(urlPatterns = {"/*"}, filterName="ControlServletFilter")
+@WebFilter(urlPatterns = {"/"}, filterName="ControlServletFilter")
 public class ControlServletFilter implements Filter {
 
     private FilterConfig filterConfig;
@@ -33,47 +40,46 @@ public class ControlServletFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
             throws IOException, ServletException {
-        {
-            // Если фильтр активной, то выполнить проверку
-//            if (filterConfig.getInitParameter("active").equalsIgnoreCase("true")) {
-                HttpServletRequest req = (HttpServletRequest)servletRequest;
-            // Извлекаем наименование страницы
-                String page = null;
-                String url = req.getRequestURI();
 
-                if(url.equals("/")){
-                    page = "UserList.jsp";
+
+                HttpServletRequest req = (HttpServletRequest)servletRequest;
+                HttpServletResponse res = (HttpServletResponse)servletResponse;
+
+                HttpSession session = req.getSession();
+                User userInSession = (User) session.getAttribute("username");
+
+                if(userInSession == null ){
+                    // Перенаправление на страницу login.jsp
+                    ServletContext ctx = filterConfig.getServletContext();
+                    RequestDispatcher dispatcher = req.getRequestDispatcher("UserLogin.jsp");
+                    dispatcher.forward(req, res);
 
                 } else {
-                    String[] list = req.getRequestURI().split("/");
-                    if (list[list.length - 1].indexOf(".jsp") > 0) {
-                        page = list[list.length - 1];
+
+                    try {
+
+                        String username = userInSession.getName();
+
+
+                        User user = new UserServiceImp().getUserByName(username);
+
+                        String role = user.getRole();
+
+                        if(role.equals("admin")){
+                            RequestDispatcher dispatcher = req.getRequestDispatcher("/admin");
+
+                            dispatcher.forward(req, res);
+
+                        } else if(role.equals("user")) {
+                            RequestDispatcher dispatcher = req.getRequestDispatcher("/user");
+
+                            dispatcher.forward(req, res);
+                        }
+
+                    } catch (Exception e) {
+                        res.getWriter().println("Incorrect login or password");
+                        e.printStackTrace();
                     }
                 }
-
-                // Если открывается главная страница, то выполняем проверку
-                if ((page != null) && page.equalsIgnoreCase("UserList.jsp")) {
-                    // Если была предварительно открыта одна из страниц
-                    // login.jsp или registration.jsp, то передаем управление
-                    // следующему элементу цепочки фильтра
-                    if (pages.contains("UserLogin.jsp") || pages.contains("UserRegistration.jsp")) {
-                        filterChain.doFilter(servletRequest, servletResponse);
-                        return;
-
-                    } else {
-                        // Перенаправление на страницу login.jsp
-                        ServletContext ctx = filterConfig.getServletContext();
-                        RequestDispatcher dispatcher = ctx.getRequestDispatcher("/UserLogin.jsp");
-                        dispatcher.forward(servletRequest, servletResponse);
-                        return;
-                    }
-                } else if (page != null) {
-                    // Добавляем страницу в список
-                    if (!pages.contains(page))
-                        pages.add(page);
-                }
-
-            filterChain.doFilter(servletRequest, servletResponse);
-        }
     }
 }

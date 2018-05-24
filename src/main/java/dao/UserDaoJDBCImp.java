@@ -132,24 +132,23 @@ public class UserDaoJDBCImp implements UserDAO {
     }
 
     @Override
-    public User getUserByNameAndPassword(String name, String password) throws SQLException {
+    public User getUserByName(String name) throws SQLException {
         User user = null;
-        String sql = "SELECT * FROM users WHERE user_name = ? AND user_password = ?";
+        String sql = "SELECT * FROM users WHERE user_name = ?";
         connect();
 
         PreparedStatement statement = jdbcConnection.prepareStatement(sql);
         statement.setString(1,name );
-        statement.setString(2, password);
+
 
         ResultSet resultSet = statement.executeQuery();
 
         if (resultSet.next()) {
              name = resultSet.getString("user_name");
-             password = resultSet.getString("user_password");
              int id = resultSet.getInt("id");
              String role = resultSet.getString("user_role");
 
-            user = new User(id, name, password, role);
+            user = new User(id, name, role);
         }
 
         resultSet.close();

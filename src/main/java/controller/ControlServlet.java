@@ -24,37 +24,13 @@ import javax.servlet.http.HttpSession;
      * requests from the user.
      * @author www.codejava.net
      */
-    @WebServlet (name="ControlServlet", displayName="ControlServlet", urlPatterns = {"/"})
+    @WebServlet (name="ControlServlet", displayName="ControlServlet", urlPatterns = {"/list"})
     public class ControlServlet extends HttpServlet {
         private UserService dbService;
 
         @Override
         protected void doPost(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse)
                 throws ServletException, IOException {
-
-            try {
-                HttpSession session = httpServletRequest.getSession(true);
-                String username = (String)session.getAttribute("username");
-
-                String login = httpServletRequest.getParameter("name");
-                String password = httpServletRequest.getParameter("password");
-                User user = dbService.getUserByNameAndPassword(login,password);
-
-                String role = user.getRole();
-
-                if(role.equals("admin")){
-                    listUser(httpServletRequest, httpServletResponse);
-
-                } else if(role.equals("user")) {
-                    RequestDispatcher dispatcher = httpServletRequest.getRequestDispatcher("UserHello.jsp");
-                    httpServletResponse.getWriter().println("User Hello");
-                    dispatcher.forward(httpServletRequest, httpServletResponse);
-                }
-
-            } catch (Exception e) {
-                httpServletResponse.getWriter().println("Incorrect login or password");
-                e.printStackTrace();
-            }
 
         }
 

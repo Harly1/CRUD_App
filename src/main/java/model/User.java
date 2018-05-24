@@ -23,11 +23,11 @@ public class User {
         this.id = id;
     }
 
-    public User(int id, String name, String password) {
+  /*  public User(int id, String name, String password) {
         this.name = name;
         this.password = password;
         this.id = id;
-    }
+    }*/
     public User(int id, String name, String password, String role) {
         this.name = name;
         this.password = password;
@@ -39,6 +39,13 @@ public class User {
         this.name = name;
         this.password = password;
     }
+
+    public User(int id, String name, String role) {
+        this.id = id;
+        this.name = name;
+        this.role = role;
+    }
+
 
     public int getId() {
         return id;

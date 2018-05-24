@@ -18,7 +18,7 @@
 
         Please login or register
 
-<form action="/list" method="POST">
+<form action="/login" method="POST">
 
     <table border="1">
         <caption></caption>
