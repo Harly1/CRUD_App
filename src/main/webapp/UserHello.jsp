@@ -13,6 +13,22 @@
 
 </head>
 <body>
+<div align="center">
 
+                <table border="1">
+
+                    <caption></caption>
+                    <thead>
+                    <tr>
+                        <th>HELLO</th>
+                        <th>USER</th>
+
+                    </tr>
+
+                    </thead>
+
+                </table>
+
+</div>
 </body>
 </html>
