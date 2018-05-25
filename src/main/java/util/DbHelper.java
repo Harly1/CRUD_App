@@ -37,4 +37,11 @@ public class DbHelper {
             return null;
         }
     }
+
+    public static Configuration getConfiguration(){
+        Configuration configuration = new Configuration().configure();
+        configuration.addAnnotatedClass(User.class);
+        return configuration;
+    }
+
 }

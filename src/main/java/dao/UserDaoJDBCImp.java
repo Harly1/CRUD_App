@@ -33,6 +33,15 @@ public class UserDaoJDBCImp implements UserDAO {
         }
     }
 
+    @Override
+    public void printConnectInfo() throws SQLException {
+        DatabaseMetaData dmd = jdbcConnection.getMetaData();
+        String url = dmd.getURL();
+        String user = dmd.getUserName();
+        String dbName = dmd.getDatabaseProductName();
+        System.out.println("url= "+url+ '\n'+" user= "+user+ '\n'+ " database= "+dbName);
+    }
+
     public boolean insertUser(User user) throws SQLException {
 //        String sql = "INSERT INTO users (id, user_name, user_password) VALUES (?, ?, ?)";
         String sql = "INSERT INTO users (user_name, user_password) VALUES (?, ?)";

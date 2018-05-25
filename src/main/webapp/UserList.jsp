@@ -10,9 +10,9 @@
 <center>
     <h1>Users Management</h1>
     <h2>
-        <a href="/new">Add New User</a>
+        <a href="/admin/new">Add New User</a>
         &nbsp;&nbsp;&nbsp;
-        <a href="/list">List All Users</a>
+        <a href="/admin/list">List All Users</a>
 
     </h2>
 </center>
@@ -33,9 +33,9 @@
                 <td><c:out value="${users.password}" /></td>
                 <td><c:out value="${users.role}" /></td>
                 <td>
-                    <a href="/edit?id=<c:out value='${users.id}' />">Edit</a>
+                    <a href="/admin/edit?id=<c:out value='${users.id}' />">Edit</a>
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <a href="/delete?id=<c:out value='${users.id}' />">Delete</a>
+                    <a href="/admin/delete?id=<c:out value='${users.id}' />">Delete</a>
                 </td>
             </tr>
         </c:forEach>

@@ -51,8 +51,7 @@ public class ControlServletFilter implements Filter {
                 if(userInSession == null ){
                     // Перенаправление на страницу login.jsp
                     ServletContext ctx = filterConfig.getServletContext();
-                    RequestDispatcher dispatcher = req.getRequestDispatcher("UserLogin.jsp");
-                    dispatcher.forward(req, res);
+                    res.sendRedirect("/login");
 
                 } else {
 
@@ -66,14 +65,11 @@ public class ControlServletFilter implements Filter {
                         String role = user.getRole();
 
                         if(role.equals("admin")){
-                            RequestDispatcher dispatcher = req.getRequestDispatcher("/admin");
 
-                            dispatcher.forward(req, res);
+                            res.sendRedirect("/admin/list");
 
                         } else if(role.equals("user")) {
-                            RequestDispatcher dispatcher = req.getRequestDispatcher("/user");
-
-                            dispatcher.forward(req, res);
+                            res.sendRedirect("/user");
                         }
 
                     } catch (Exception e) {

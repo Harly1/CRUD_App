@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface UserService {
-     void printConnectInfo() throws SQLException;
+
    /*  Connection getJdbcConnection();
      Connection getHibernetConnection();*/
 

@@ -28,7 +28,7 @@
             </c:if>
 
 
-<form action="/add" method="POST">
+<form action="/admin/add" method="POST">
 
     <table border="1">
         <caption></caption>

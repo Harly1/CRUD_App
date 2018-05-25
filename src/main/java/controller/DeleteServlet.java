@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet(name="DeleteServlet", displayName="DeleteServlet", urlPatterns = {"/delete"})
+@WebServlet(name="DeleteServlet", displayName="DeleteServlet", urlPatterns = {"/admin/delete"})
 public class DeleteServlet extends HttpServlet {
 
     private UserService dbService;
@@ -36,6 +36,6 @@ public class DeleteServlet extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         User user = new User(id);
         dbService.deleteUser(user);
-        response.sendRedirect("list");
+        response.sendRedirect("admin/list");
     }
 }

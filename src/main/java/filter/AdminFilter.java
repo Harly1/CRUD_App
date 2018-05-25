@@ -30,16 +30,14 @@ public class AdminFilter implements Filter {
         HttpSession session = request.getSession();
         User userInSession = (User) session.getAttribute("username");
         String role  = userInSession.getRole();
-        RequestDispatcher dispatcher;
+
 
         switch (role){
             case "admin":
-                    dispatcher = request.getRequestDispatcher("/list");
-                    dispatcher.forward(request, response);
+                    response.sendRedirect("/admin");
                     break;
             case "user":
-                    dispatcher = request.getRequestDispatcher("/user");
-                    dispatcher.forward(request, response);
+                    response.setStatus(403);
                     break;
             default: response.getWriter().println("Role is not defined");
                     break;

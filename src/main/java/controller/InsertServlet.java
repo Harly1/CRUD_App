@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet(name="InsertServlet", displayName="InsertServlet", urlPatterns = {"/insert"})
+@WebServlet(name="InsertServlet", displayName="InsertServlet", urlPatterns = {"/admin/insert"})
 public class InsertServlet extends HttpServlet {
 
     private UserService dbService;
@@ -51,6 +51,6 @@ public class InsertServlet extends HttpServlet {
 //        User newUser = new User(id, name, password);
         User newUser = new User(name, password);
         dbService.insertUser(newUser);
-        response.sendRedirect("list");
+        response.sendRedirect("admin/list");
     }
 }

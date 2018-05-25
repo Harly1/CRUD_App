@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name="NewServlet", displayName="NewServlet", urlPatterns = {"/new"})
+@WebServlet(name="NewServlet", displayName="NewServlet", urlPatterns = {"/admin/new"})
 public class NewServlet extends HttpServlet {
 
     private UserService dbService;

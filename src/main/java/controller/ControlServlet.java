@@ -1,5 +1,7 @@
 package controller;
 
+import dao.UserDAO;
+import factory.UserDaoFactory;
 import service.UserService;
 import service.UserServiceImp;
 import model.User;
@@ -24,20 +26,13 @@ import javax.servlet.http.HttpSession;
      * requests from the user.
      * @author www.codejava.net
      */
-    @WebServlet (name="ControlServlet", displayName="ControlServlet", urlPatterns = {"/list"})
+    @WebServlet (name="ControlServlet", displayName="ControlServlet", urlPatterns = {"/admin"})
     public class ControlServlet extends HttpServlet {
-        private UserService dbService;
-
-        @Override
-        protected void doPost(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse)
-                throws ServletException, IOException {
-
-        }
 
         public void init() {
-            dbService = new UserServiceImp();
+            UserDAO userDAO = UserDaoFactory.getDao();
             try {
-                dbService.printConnectInfo();
+                userDAO.printConnectInfo();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -54,15 +49,11 @@ import javax.servlet.http.HttpSession;
 
         private void listUser(HttpServletRequest request, HttpServletResponse response)
                 throws SQLException, IOException, ServletException {
+            UserService dbService = new UserServiceImp();
             List<User> listUser = dbService.listUser();
             request.setAttribute("listUser", listUser);
             RequestDispatcher dispatcher = request.getRequestDispatcher("UserList.jsp");
             dispatcher.forward(request, response);
-        }
-
-        private void checkUser(HttpServletRequest request, HttpServletResponse response)
-                throws SQLException, IOException, ServletException {
-
         }
 
     }

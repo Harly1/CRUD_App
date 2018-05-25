@@ -15,13 +15,14 @@ public class UserFilter implements Filter {
     }
 
     @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
+            throws IOException, ServletException {
+
         HttpServletResponse response= (HttpServletResponse) servletResponse;
         HttpServletRequest request = (HttpServletRequest) servletRequest;
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("UserHello.jsp");
+        response.sendRedirect("/user/welcome");
 
-        dispatcher.forward(request, response);
     }
 
     @Override

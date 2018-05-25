@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet(name="EditServlet", displayName="EditServlet", urlPatterns = {"/edit"})
+@WebServlet(name="EditServlet", displayName="EditServlet", urlPatterns = {"/admin/edit"})
 public class EditServlet extends HttpServlet {
 
     private UserService dbService;

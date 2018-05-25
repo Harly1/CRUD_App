@@ -21,7 +21,7 @@ public class UserDaoFactory {
                 properties.load(read);
                 String realization = properties.getProperty("userDao");
                 System.out.println("DAO_realization = " + realization);
-                return realization.equals("hibernet") ? new UserDaoHibernetImp() : new UserDaoJDBCImp(DbHelper.getJdbcConnection());
+                return realization.equals("hibernet") ? new UserDaoHibernetImp(DbHelper.getConfiguration()) : new UserDaoJDBCImp(DbHelper.getJdbcConnection());
             } catch (Exception e){
                 return null;
             }

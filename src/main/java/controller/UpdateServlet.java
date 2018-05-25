@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet(name="UpdateServlet", displayName="UpdateServlet", urlPatterns = {"/update"})
+@WebServlet(name="UpdateServlet", displayName="UpdateServlet", urlPatterns = {"/admin/update"})
 public class UpdateServlet extends HttpServlet {
 
     private UserService dbService;
