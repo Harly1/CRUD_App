@@ -21,7 +21,9 @@ public class AdminFilter implements Filter {
     }
 
     @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
+            throws IOException, ServletException {
+
         HttpServletResponse response= (HttpServletResponse) servletResponse;
         HttpServletRequest request = (HttpServletRequest) servletRequest;
 
@@ -40,6 +42,7 @@ public class AdminFilter implements Filter {
                     dispatcher.forward(request, response);
                     break;
             default: response.getWriter().println("Role is not defined");
+                    break;
         }
     }
 

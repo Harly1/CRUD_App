@@ -18,9 +18,15 @@ import java.sql.SQLException;
 @WebServlet(name="LoginServlet", displayName="LoginServlet",urlPatterns = {"/login"})
 public class LoginServlet extends HttpServlet {
 
+	@Override
+	protected void doGet(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws ServletException, IOException {
+
+		RequestDispatcher dispatcher = httpServletRequest.getRequestDispatcher("UserLogin.jsp");
+		dispatcher.forward(httpServletRequest, httpServletResponse);
+	}
 
 	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+						  HttpServletResponse response) throws ServletException, IOException {
 
 
 		String name = request.getParameter("name");
@@ -34,31 +40,26 @@ public class LoginServlet extends HttpServlet {
 		}
 
 		HttpSession session = request.getSession(true);
-		session.setAttribute("username",user);
+		session.setAttribute("username", user);
 
-		if(user.getRole().equals("admin")){
-			response.sendRedirect("/admin");
+		if (user == null) {
+			response.getWriter().println("Login or password is invalid");
+			response.sendRedirect("/login");
 		} else {
-			response.sendRedirect("/user");
+
+			String role = user.getRole();
+
+			switch (role) {
+				case "admin":
+					response.sendRedirect("/admin");
+					break;
+				case "user":
+					response.sendRedirect("/user");
+					break;
+				default:
+					response.getWriter().println("Login or password is invalid");
+					break;
+			}
 		}
-
-
-	/*	if(userID.equals(user) && password.equals(pwd)){
-			HttpSession session = request.getSession();
-			session.setAttribute("user", "Pankaj");
-			//setting session to expiry in 30 mins
-			session.setMaxInactiveInterval(30*60);
-			Cookie userName = new Cookie("user", user);
-			userName.setMaxAge(30*60);
-			response.addCookie(userName);
-			response.sendRedirect("LoginSuccess.jsp");
-		}else{
-			RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.html");
-			PrintWriter out= response.getWriter();
-			out.println("<font color=red>Either user name or password is wrong.</font>");
-			rd.include(request, response);
-		}*/
-
 	}
-
 }
