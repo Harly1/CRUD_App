@@ -18,7 +18,7 @@ public class UserFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
             throws IOException, ServletException {
 
-        HttpServletResponse response= (HttpServletResponse) servletResponse;
+        HttpServletResponse response = (HttpServletResponse) servletResponse;
         HttpServletRequest request = (HttpServletRequest) servletRequest;
 
         response.sendRedirect("/user/welcome");

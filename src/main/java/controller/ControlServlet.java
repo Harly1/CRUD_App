@@ -26,7 +26,7 @@ import javax.servlet.http.HttpSession;
      * requests from the user.
      * @author www.codejava.net
      */
-    @WebServlet (name="ControlServlet", displayName="ControlServlet", urlPatterns = {"/admin"})
+    @WebServlet (name="ControlServlet", displayName="ControlServlet", urlPatterns = {"/admin/list"})
     public class ControlServlet extends HttpServlet {
 
         public void init() {

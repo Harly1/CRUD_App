@@ -16,7 +16,8 @@ public class UserDaoFactory {
 
     public static UserDAO getDao(){
         if(userDao == null){
-            try(InputStream read = new FileInputStream("C:\\Users\\KrVl8001\\IdeaProjects\\CRUD_App\\src\\main\\resources\\db.properties")){
+            try(InputStream read =
+                new FileInputStream("C:\\Users\\KrVl8001\\IdeaProjects\\CRUD_App\\src\\main\\resources\\db.properties")){
                 Properties properties = new Properties();
                 properties.load(read);
                 String realization = properties.getProperty("userDao");

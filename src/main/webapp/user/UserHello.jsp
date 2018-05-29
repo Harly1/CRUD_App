@@ -16,12 +16,12 @@
 <div align="center">
 
                 <table border="1">
-
+                <c:forEach var="userName" items="${userName}">
                     <caption></caption>
                     <thead>
                     <tr>
                         <th>HELLO</th>
-                        <th>USER</th>
+                        <th>${userName}</th>
 
                     </tr>
 

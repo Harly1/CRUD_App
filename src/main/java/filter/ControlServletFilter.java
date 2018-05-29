@@ -56,20 +56,16 @@ public class ControlServletFilter implements Filter {
                 } else {
 
                     try {
-
                         String username = userInSession.getName();
-
-
                         User user = new UserServiceImp().getUserByName(username);
-
                         String role = user.getRole();
 
-                        if(role.equals("admin")){
+                        if("admin".equals(role)){
 
                             res.sendRedirect("/admin/list");
 
-                        } else if(role.equals("user")) {
-                            res.sendRedirect("/user");
+                        } else if("user".equals(role)) {
+                            res.sendRedirect("/user/welcome");
                         }
 
                     } catch (Exception e) {

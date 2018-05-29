@@ -1,9 +1,11 @@
 package controller;
 
+import filter.AdminFilterWall;
 import model.User;
 import service.UserService;
 import service.UserServiceImp;
 
+import javax.servlet.FilterConfig;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,6 +19,7 @@ import java.sql.SQLException;
  */
 @WebServlet(name="LoginServlet", displayName="LoginServlet",urlPatterns = {"/login"})
 public class LoginServlet extends HttpServlet {
+
 
 	@Override
 	protected void doGet(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws ServletException, IOException {
@@ -51,7 +54,10 @@ public class LoginServlet extends HttpServlet {
 
 			switch (role) {
 				case "admin":
-					response.sendRedirect("/admin");
+					response.sendRedirect("/admin/list");
+
+//					RequestDispatcher dispatcher = request.getRequestDispatcher("UserList.jsp");
+//					dispatcher.forward(request, response);
 					break;
 				case "user":
 					response.sendRedirect("/user");
