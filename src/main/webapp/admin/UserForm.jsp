@@ -11,7 +11,7 @@
 
 <html>
 <head>
-    <a href="admin/list">List All Books</a>
+    <a href="list">List All Books</a>
     <title></title>
 
 </head>

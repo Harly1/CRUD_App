@@ -18,23 +18,18 @@ import java.util.ArrayList;
 @WebFilter(urlPatterns = {"/"}, filterName="ControlServletFilter")
 public class ControlServletFilter implements Filter {
 
-    private FilterConfig filterConfig;
-    private static ArrayList<String> pages;
-
     public ControlServletFilter(){
-        // Создание хранилища страниц
-        if (pages == null)
-            pages = new ArrayList<String>();
+
     }
 
     @Override
     public void init(FilterConfig fConfig) throws ServletException {
-        filterConfig = fConfig;
+
     }
 
     @Override
     public void destroy() {
-        filterConfig = null;
+
     }
 
     @Override
@@ -42,36 +37,35 @@ public class ControlServletFilter implements Filter {
             throws IOException, ServletException {
 
 
-                HttpServletRequest req = (HttpServletRequest)servletRequest;
-                HttpServletResponse res = (HttpServletResponse)servletResponse;
+         HttpServletRequest req = (HttpServletRequest)servletRequest;
+         HttpServletResponse res = (HttpServletResponse)servletResponse;
 
-                HttpSession session = req.getSession();
-                User userInSession = (User) session.getAttribute("username");
+         HttpSession session = req.getSession();
+         User userInSession = (User) session.getAttribute("username");
 
-                if(userInSession == null ){
-                    // Перенаправление на страницу login.jsp
-                    ServletContext ctx = filterConfig.getServletContext();
-                    res.sendRedirect("/login");
+         if(userInSession == null ){
+             // Перенаправление на страницу login.jsp
 
-                } else {
+             res.sendRedirect("/login");
 
-                    try {
-                        String username = userInSession.getName();
-                        User user = new UserServiceImp().getUserByName(username);
-                        String role = user.getRole();
+         } else {
 
-                        if("admin".equals(role)){
+             try {
+                 String username = userInSession.getName();
+                 User user = new UserServiceImp().getUserByName(username);
+                 String role = user.getRole();
 
-                            res.sendRedirect("/admin/list");
+                 if("admin".equals(role)){
+                     res.sendRedirect("/admin/list");
 
-                        } else if("user".equals(role)) {
-                            res.sendRedirect("/user/welcome");
-                        }
+                 } else if("user".equals(role)) {
+                     res.sendRedirect("/user/welcome");
+                 }
 
-                    } catch (Exception e) {
-                        res.getWriter().println("Incorrect login or password");
-                        e.printStackTrace();
-                    }
-                }
+             } catch (Exception e) {
+                 res.getWriter().println("Incorrect login or password");
+                 e.printStackTrace();
+             }
+         }
     }
 }
