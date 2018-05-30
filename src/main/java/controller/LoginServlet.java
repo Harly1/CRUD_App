@@ -33,6 +33,8 @@ public class LoginServlet extends HttpServlet {
 
 
 		String name = request.getParameter("name");
+		String passwordFromForm = request.getParameter("password");
+
 
 		User user = null;
 		try {
@@ -50,21 +52,25 @@ public class LoginServlet extends HttpServlet {
 			response.sendRedirect("/login");
 		} else {
 
+			String passwordFromDB = user.getPassword();
 			String role = user.getRole();
 
-			switch (role) {
-				case "admin":
-					response.sendRedirect("/admin/list");
+			if(passwordFromDB.equals(passwordFromForm)) {
+				switch (role) {
+					case "admin":
+						response.sendRedirect("/admin/list");
 
-//					RequestDispatcher dispatcher = request.getRequestDispatcher("UserList.jsp");
-//					dispatcher.forward(request, response);
-					break;
-				case "user":
-					response.sendRedirect("/user/welcome");
-					break;
-				default:
-					response.getWriter().println("Login or password is invalid");
-					break;
+						break;
+					case "user":
+						response.sendRedirect("/user/welcome");
+
+						break;
+					default:
+						response.getWriter().println("Login or password is invalid");
+						break;
+				}
+			} else {
+				response.getWriter().println("Login or password is invalid");
 			}
 		}
 	}
