@@ -60,7 +60,7 @@ public class LoginServlet extends HttpServlet {
 //					dispatcher.forward(request, response);
 					break;
 				case "user":
-					response.sendRedirect("/user");
+					response.sendRedirect("/user/welcome");
 					break;
 				default:
 					response.getWriter().println("Login or password is invalid");

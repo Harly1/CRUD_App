@@ -43,14 +43,10 @@ public class InsertServlet extends HttpServlet {
 
     private void insertUser(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException {
-//        int id = Integer.parseInt(request.getParameter("id"));
         String name = request.getParameter("name");
         String password = request.getParameter("password");
-
-
-//        User newUser = new User(id, name, password);
-        User newUser = new User(name, password);
+        User newUser = new User(name, password,"user");
         dbService.insertUser(newUser);
-        response.sendRedirect("admin/list");
+        response.sendRedirect("list");
     }
 }

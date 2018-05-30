@@ -36,6 +36,6 @@ public class DeleteServlet extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         User user = new User(id);
         dbService.deleteUser(user);
-        response.sendRedirect("admin/list");
+        response.sendRedirect("list");
     }
 }

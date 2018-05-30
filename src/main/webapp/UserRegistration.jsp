@@ -16,9 +16,9 @@
 <body>
 <div align="center">
 
-        Please login
+        Please register
 
-<form action="/login" method="POST">
+<form action="/registration" method="POST">
 
     <table border="1">
         <caption></caption>
@@ -54,13 +54,9 @@
 
     </table>
 
-    <input type="submit" value="Login"/>
+    <input type="submit" value="Registration"/>
 
 </form>
-
-    <form action="/registration" method="GET">
-        <input type="submit" value="Registration"/>
-    </form>
 
     </div>
 </body>

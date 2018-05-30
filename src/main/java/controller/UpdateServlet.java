@@ -47,7 +47,7 @@ public class UpdateServlet extends HttpServlet {
         String name = request.getParameter("name");
         String password = request.getParameter("password");
 
-        User user = new User(id,name, password);
+        User user = new User(id, name, password,"user");
         dbService.updateUser(user);
         response.sendRedirect("list");
     }
